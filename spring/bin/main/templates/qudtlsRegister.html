@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>병신등록하기</title>
+	<style>
+		/* Basic styling; update and expand as needed */
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+			background-size: 400% 400%;
+			animation: gradientBG 15s ease infinite;
+		}
+
+		@keyframes gradientBG {
+			0% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+
+			100% {
+				background-position: 0% 50%;
+			}
+		}
+
+		.header {
+			background-color: rgba(255, 255, 255, 0.8);
+			padding: 10px 0;
+			position: sticky;
+			top: 0;
+			z-index: 1000;
+		}
+
+		.nav {
+			display: flex;
+			justify-content: center;
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		.nav li {
+			padding: 0 20px;
+		}
+
+		.nav a {
+			text-decoration: none;
+			color: #007bff;
+			transition: color 0.3s ease-out;
+		}
+
+		.nav a:hover {
+			color: #0056b3;
+		}
+
+		.centered-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: flex-start;
+			/* Change to flex-start to align content to the top */
+			min-height: calc(100vh - 200px);
+			/* Subtract the height of header and footer if they are fixed */
+			padding-top: 20px;
+			/* Add some space above the form */
+		}
+
+		.form-container {
+			background: white;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			width: 100%;
+			max-width: 500px;
+			/* Control the maximum width of the form */
+			margin: auto;
+			/* Automatically calculate equal left and right margins */
+		}
+
+		/* Adjustments for smaller screens */
+		@media (max-width: 768px) {
+			.centered-container {
+				min-height: calc(100vh - 100px);
+				/* Adjust based on the actual header/footer height */
+			}
+		}
+
+		.form-container form {
+			display: flex;
+			flex-direction: column;
+			align-items: stretch;
+			/* Align items in a way that they stretch to fill the container */
+		}
+
+		.form-container label,
+		.form-container input,
+		.form-container input[type="submit"] {
+			margin-bottom: 10px;
+			/* Add some bottom margin to form elements */
+			width: calc(100% - 20px);
+			/* Subtract the total padding from the width to maintain consistent spacing */
+			box-sizing: border-box;
+			/* Include padding and border in the element's total width and height */
+		}
+
+
+		.form-container input[type="text"],
+		.form-container input[type="number"],
+		.form-container input[type="submit"] {
+			width: 100%;
+			/* Full width */
+			padding: 10px;
+			margin: 10px 0;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+		}
+
+		.form-container input[type="submit"] {
+			background-color: #007bff;
+			color: white;
+			border: none;
+			cursor: pointer;
+			transition: background-color 0.3s ease-out;
+		}
+
+		.form-container input[type="submit"]:hover {
+			background-color: #0056b3;
+		}
+
+		/* Center the hero text */
+		.hero {
+			text-align: center;
+			padding-top: 20px;
+			/* Add padding to the top */
+		}
+
+		/* Footer style */
+		.footer {
+			background-color: rgba(255, 255, 255, 0.8);
+			padding: 10px 0;
+			text-align: center;
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+		}
+		.button-group {
+    display: flex;
+    justify-content: space-between; /* Adjust as needed */
+    margin-top: 10px;
+}
+
+.button-group input[type="submit"],
+.button-group button {
+    width: 48%; /* Adjust width to account for margin */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-out;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px; /* Adjust font size as needed */
+    margin: 1%; /* Add margin to create space between buttons */
+}
+
+.button-group button:hover,
+.button-group input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+	</style>
+</head>
+
+<body>
+
+
+	<div class="header">
+		<ul class="nav">
+			<li><a href="/home">Home</a></li>
+			<li><a href="#">About Us</a></li>
+			<li><a href="#">Services</a></li>
+			<li><a href="#">Blog</a></li>
+			<li><a href="#">Contact</a></li>
+		</ul>
+	</div>
+
+	<div class="hero">
+		<h1>등록 페이지</h1>
+		<p>새로운 병신을 등록하려면 아래 양식을 작성하세요.</p>
+	</div>
+
+	<div class="form-container">
+		<form action="/qudtlsRegister" method="post" id="registerForm">
+			<label for="name">Name:</label>
+			<input type="text" id="name" name="name" required>
+	
+			<label for="age">Age:</label>
+			<input type="number" id="age" name="age" required>
+	
+			<label for="job">Job:</label>
+			<input type="text" id="job" name="job" required>
+	
+			<label for="rank">Rank:</label>
+			<input type="text" id="rank" name="rank" required>
+	
+			<label for="reason">Reason:</label>
+			<input type="text" id="reason" name="reason" required>
+	
+			<div class="button-group">
+				<input type="submit" value="Register">
+				<button type="button" onclick="location.href='/qudtlsMaster'">Back to the List</button>
+			</div>
+		</form>
+	</div>
+	
+
+	<div class="footer">
+		<!-- Your footer content -->
+	</div>
+
+
+
+
+
+
+
+	<!-- Script for form validation or other functionalities -->
+	<script>
+		document.getElementById('registerForm').onsubmit = function (event) {
+			// You can include validation checks here
+			var password = document.getElementById('password').value;
+			var confirmPassword = document.getElementById('confirmPassword').value;
+
+			if (password !== confirmPassword) {
+				event.preventDefault(); // Stop form submission
+				alert('Passwords do not match.');
+			}
+			// Continue with the form submission if passwords match
+		};
+	</script>
+
+	<!-- Other scripts -->
+
+</body>
+
+</html>

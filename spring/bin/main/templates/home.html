@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Make List</title>
+	<style>
+		/* Basic styling; update and expand as needed */
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+			background-size: 400% 400%;
+			animation: gradientBG 15s ease infinite;
+		}
+
+		@keyframes gradientBG {
+			0% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+
+			100% {
+				background-position: 0% 50%;
+			}
+		}
+
+		.header {
+			background-color: rgba(255, 255, 255, 0.8);
+			padding: 10px 0;
+			position: sticky;
+			top: 0;
+			z-index: 1000;
+		}
+
+		.nav {
+			display: flex;
+			justify-content: center;
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		.nav li {
+			padding: 0 20px;
+		}
+
+		.nav a {
+			text-decoration: none;
+			color: #007bff;
+			transition: color 0.3s ease-out;
+		}
+
+		.nav a:hover {
+			color: #0056b3;
+		}
+
+		.hero {
+			text-align: center;
+			padding: 100px 20px;
+			color: white;
+		}
+
+		.hero h1 {
+			margin-bottom: 20px;
+			font-size: 2.5em;
+		}
+
+		.hero button {
+			padding: 10px 20px;
+			background-color: #007bff;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.3s ease-out;
+		}
+
+		.hero button:hover {
+			background-color: #0056b3;
+		}
+
+		.services {
+			display: flex;
+			justify-content: space-around;
+			padding: 20px;
+			background: rgba(255, 255, 255, 0.8);
+			margin-top: -50px;
+			backdrop-filter: blur(5px);
+		}
+
+		.service {
+			display: block;
+			text-align: center;
+			flex: 1;
+			margin: 0 10px;
+			padding: 20px;
+			background: white;
+			border-radius: 10px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			transition: all 0.3s ease-out;
+			text-decoration: none;
+			color: inherit;
+			cursor: pointer;
+		}
+
+		.service:hover {
+			background-color: #f0f0f0;
+			transform: translateY(-5px);
+			box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+		}
+
+
+
+		.footer {
+			background-color: rgba(248, 249, 250, 0.8);
+			text-align: center;
+			padding: 20px 0;
+			position: relative;
+			z-index: 1000;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="header">
+		<ul class="nav">
+			<li><a href="/home">Home</a></li>
+			<li><a href="#">About Us</a></li>
+			<li><a href="#">Services</a></li>
+			<li><a href="#">Blog</a></li>
+			<li><a href="#">Contact</a></li>
+		</ul>
+	</div>
+
+	<div class="hero">
+		<h1>이런저런 등록사이트에 오신것을 환영합니다</h1>
+		<p>아무거나 등록하는 곳입니다. 매너따윈 개나 줘버리세요</p>
+		<button onclick="window.location='#services'">오늘의 이슈</button>
+	</div>
+
+	<div id="services" class="services">
+		<a href="/qudtlsMaster" class="service">
+			<h2>병신一覧</h2>
+			<p>어떠한 병신들이 있는지 구경한다.</p>
+		</a>
+		<div class="service">
+			<h2>이쁘니一覧</h2>
+			<p>이쁜애들을 구경한다.</p>
+		</div>
+		<div class="service">
+			<h2>유튜브 콘텐츠추천一覧</h2>
+			<p>보고싶은 콘텐츠를 추천한다.</p>
+		</div>
+	</div>
+
+	<div class="footer">
+		<p>Connect with us:</p>
+		<a target="_blank" href="https://www.facebook.com/profile.php?id=100003287513709">Facebook</a> |
+		<a target="_blank" href="https://www.instagram.com/fin__kim/?hl=ko">Insta</a> |
+		<a target="_blank" href="https://www.youtube.com/">Youtube</a>
+		<div>
+			<p>Subscribe to our newsletter for the latest updates.</p>
+			<form>
+				<input type="email" id="email" placeholder="Enter your email" required>
+				<input type="submit" value="Subscribe">
+			</form>
+		</div>
+	</div>
+
+</body>
+
+<script>
+
+
+</script>
+
+
+</html>

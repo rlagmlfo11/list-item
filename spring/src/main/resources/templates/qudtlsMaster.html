@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>병신 List</title>
+	<style>
+		/* General page styles */
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+			background-size: 400% 400%;
+			animation: gradientBG 15s ease infinite;
+		}
+
+		@keyframes gradientBG {
+			0% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+
+			100% {
+				background-position: 0% 50%;
+			}
+		}
+
+		/* Top bar and navigation styles */
+		.top-bar {
+			display: flex;
+			justify-content: space-between;
+			/* Space out nav and buttons */
+			align-items: center;
+			/* Align items vertically */
+			background-color: rgba(255, 255, 255, 0.8);
+			padding: 10px 0;
+			position: sticky;
+			top: 0;
+			z-index: 1000;
+		}
+
+		.nav-container {
+			flex-grow: 1;
+			/* Allows nav container to grow and push buttons to the right */
+		}
+
+		.nav {
+			display: flex;
+			list-style-type: none;
+			justify-content: center;
+			margin: 0;
+			padding: 0;
+		}
+
+		.nav li {
+			padding: 0 20px;
+		}
+
+		.nav a {
+			text-decoration: none;
+			color: #007bff;
+			transition: color 0.3s ease-out;
+		}
+
+		.nav a:hover {
+			color: #0056b3;
+		}
+
+		/* Style for header buttons */
+		.header-buttons {
+			position: absolute;
+			right: 0;
+			/* Align buttons to the right */
+			top: 50%;
+			transform: translateY(-50%);
+			/* Center buttons vertically */
+			padding-right: 20px;
+			/* Adjust this as needed */
+		}
+
+		.button-link,
+		.button-download {
+			padding: 10px 20px;
+			margin-left: 10px;
+			/* Space between buttons */
+			border-radius: 5px;
+			text-decoration: none;
+			color: white;
+			background-color: #007bff;
+			border: none;
+			cursor: pointer;
+			transition: background-color 0.3s ease-out;
+		}
+
+		.button-link:hover,
+		.button-download:hover {
+			background-color: #0056b3;
+		}
+
+		/* Page title styles */
+		.page-title {
+			display: flex;
+			justify-content: center;
+			/* Center title horizontally */
+			align-items: center;
+			/* Align title vertically */
+			padding: 10px 0;
+			/* Reduced padding to decrease height */
+			position: relative;
+			/* Needed for absolute positioning of the buttons */
+			background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+			/* Adjusted background to match the gradient */
+			margin: 20px;
+			/* Matching margin with main content */
+			border-radius: 10px;
+			/* Adding border-radius to match main content style */
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			/* Adding box shadow to match main content */
+		}
+
+		/* Main content and table styles */
+		.main-content {
+			margin: 20px;
+			/* Add margin around the main content */
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			background-color: white;
+			border-radius: 10px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		th,
+		td {
+			padding: 10px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+
+		th {
+			background-color: #f0f0f0;
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+		}
+
+		tbody tr:hover {
+			background-color: #f0f0f0;
+			/* Change background color on hover */
+		}
+
+		/* Pagination styles */
+		.pagination {
+			display: flex;
+			justify-content: center;
+			list-style-type: none;
+			padding: 0;
+		}
+
+		.pagination li {
+			margin: 0 5px;
+		}
+
+		.pagination a {
+			text-decoration: none;
+			padding: 5px 10px;
+			color: #007bff;
+			border: 1px solid #ddd;
+			background-color: #fff;
+		}
+
+		.pagination a:hover,
+		.pagination .active a {
+			background-color: #007bff;
+			color: white;
+		}
+
+		.pagination .active a {
+			font-weight: bold;
+			/* Makes the text bold for the active page */
+			pointer-events: none;
+			/* Optional: Disables the link for the active page */
+			cursor: default;
+		}
+
+		tbody tr {
+			cursor: pointer;
+			/* Makes the cursor look like a pointer when hovering over table rows */
+		}
+
+		tbody tr:hover {
+			background-color: #f0f0f0;
+			/* Change background color on hover */
+		}
+
+		.search-container {
+			text-align: right;
+			/* Aligns the search bar to the right */
+			padding-right: 20px;
+			/* Adds some padding on the right */
+			margin-top: 10px;
+			/* Adds some space above the search bar */
+		}
+
+		/* Styles for the search input */
+		.search-input {
+			border: 1px solid #ddd;
+			/* Gives the input a border */
+			border-radius: 5px;
+			/* Rounds the corners of the input */
+			padding: 5px 10px;
+			/* Adds some padding inside the input */
+			margin-right: 5px;
+			/* Adds some margin to the right of the input */
+		}
+
+		/* Styles for the search button */
+		.search-button {
+			border: none;
+			/* Removes the default border */
+			border-radius: 5px;
+			/* Rounds the corners of the button */
+			padding: 5px 10px;
+			/* Adds some padding inside the button */
+			background-color: #007bff;
+			/* Sets the background color */
+			color: white;
+			/* Sets the text color */
+			cursor: pointer;
+			/* Changes the cursor to a pointer */
+		}
+
+		.search-button:hover {
+			background-color: #0056b3;
+			/* Changes background color on hover */
+		}
+		
+	</style>
+</head>
+
+<body>
+
+	<div class="top-bar">
+		<div class="nav-container">
+			<ul class="nav">
+				<li><a href="/home">Home</a></li>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">Blog</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="page-title">
+		<h1>병신 List</h1>
+		<div class="header-buttons">
+			<a href="/qudtlsRegister" class="button-link">Register</a>
+			<button class="button-download" onclick="confirmDownload()">Download</button>
+		</div>
+	</div>
+
+	<div class="main-content">
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Age</th>
+					<th>Job</th>
+					<th>Rank</th>
+					<th>Reason</th>
+				</tr>
+			</thead>
+			<tbody id="data-body">
+				<tr th:each="qudtls : ${qudtlsemf}"
+					th:onclick="'location.href=\'' + @{/qudtls/details/{id}(id=${qudtls.id})} + '\''">
+					<td th:text="${qudtls.id}"></td>
+					<td th:text="${qudtls.name}"></td>
+					<td th:text="${qudtls.age}"></td>
+					<td th:text="${qudtls.job}"></td>
+					<td th:text="${qudtls.rank}"></td>
+					<td th:text="${qudtls.reason}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="search-container">
+		<form id="searchForm">
+			<input type="text" id="searchKeyword" class="search-input" name="keyword" placeholder="Type to search..."
+				required>
+			<button type="submit" class="search-button">Search</button>
+		</form>
+	</div>
+
+
+	<div>
+		<ul class="pagination">
+			<!-- Previous page sequence button -->
+			<li th:if="${currentPage > 9}">
+				<a th:href="@{/qudtlsMaster(page=${(currentPage div 10) * 10 - 10}, size=${size})}">&laquo;</a>
+			</li>
+
+			<!-- Individual page numbers -->
+			<li th:each="i : ${#numbers.sequence((currentPage div 10) * 10, 
+                                               (currentPage div 10) * 10 + 9)}"
+				th:classappend="${currentPage == i ? 'active' : ''}" th:if="${i < totalPages}">
+				<a th:href="@{/qudtlsMaster(page=${i}, size=${size})}" th:text="${i + 1}"></a>
+			</li>
+
+			<!-- Next page sequence button -->
+			<li th:if="${totalPages > ((currentPage div 10) + 1) * 10}">
+				<a th:href="@{/qudtlsMaster(page=${((currentPage div 10) + 1) * 10}, size=${size})}">&raquo;</a>
+			</li>
+		</ul>
+	</div>
+
+
+	<script>
+		function performSearch(keyword) {
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', '/storeSearch', true);
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			xhr.onload = function () {
+				if (xhr.status === 200) {
+					// The response should contain the search results which will be used to update the table.
+					var results = JSON.parse(xhr.responseText);
+					if (results.length > 0) { // Check if results have one or more items.
+						updateTable(results);
+					} else {
+						alert('No results found for the entered name.'); // Alert when no results are found.
+					}
+				} else {
+					console.error('Search request failed. Returned status of ' + xhr.status);
+				}
+			};
+			xhr.send('keyword=' + encodeURIComponent(keyword));
+		}
+
+		// The event listener for the form submission uses performSearch.
+		document.getElementById('searchForm').onsubmit = function (event) {
+			event.preventDefault(); // Prevent form submission and page refresh
+			var input = document.getElementById('searchKeyword').value.trim();
+			if (input === "") {
+				alert('Please type a name');
+			} else {
+				performSearch(input); // Call performSearch with the input value.
+			}
+		};
+
+
+
+		function updateTable(results) {
+			var tbody = document.getElementById('data-body');
+			tbody.innerHTML = ''; // Clear existing table data
+			results.forEach(function (record) {
+				var tr = document.createElement('tr');
+				tr.onclick = function () {
+					window.location.href = '/qudtls/details/' + record.id;
+				};
+				tr.style.cursor = 'pointer';
+				tr.innerHTML = `<td>${record.id}</td>
+                        <td>${record.name}</td>
+                        <td>${record.age}</td>
+                        <td>${record.job}</td>
+                        <td>${record.rank}</td>
+                        <td>${record.reason}</td>`;
+				tbody.appendChild(tr);
+			});
+
+			// Select the pagination container and hide it
+			var paginationContainer = document.querySelector('.pagination');
+			if (paginationContainer) {
+				paginationContainer.style.display = 'none';
+			}
+		}
+
+
+		function confirmDownload() {
+			if (confirm('Do You Want To Download the List?')) {
+				window.location.href = '/download/csv'; // proceed with the download
+			}
+		}
+
+
+	</script>
+
+
+
+</body>
+
+</html>
